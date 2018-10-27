@@ -11,7 +11,6 @@ class ErrorHandler:
     def process_response(self, req, resp, resource):
         if resp.status != falcon.HTTP_200:
             resp.status = falcon.HTTP_404
-            print(req)
             resp.json = {
                 "message": "Not Found - %s %s" % (req.method, req.relative_uri)
             }
