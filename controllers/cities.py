@@ -18,8 +18,9 @@ class CityRoutes(object):
             for i in result:
                 if i.name is None or i.state is None or i.country is None:
                     continue
+                id = str(i._id)
                 row = {
-                    'id': str(i._id),
+                    'id': id,
                     'name': i.name,
                     'state': i.state,
                     'country': i.country
@@ -49,7 +50,13 @@ class CityRoutes(object):
                     }
                 io_loop.stop()
         def handle_city_found(result):
+            if result is None:
+                resp.status = falcon.HTTP_400
+                io_loop.stop()
+                return
+            id = str(result._id)
             resp.json = {
+                "id": id,
                 "name": result._name,
                 "state": result._state,
                 "country": result._country
@@ -78,7 +85,9 @@ class CityRoutes(object):
                     }
                 io_loop.stop()
         def handle_city_created(result):
+            id = str(result._id)
             resp.json = {
+                "id": id,
                 "name": result.name,
                 "state": result.state,
                 "country": result.country
@@ -110,10 +119,34 @@ class CityRoutes(object):
                     }
                 io_loop.stop()
         def handle_city_found(result):
+            if result is None:
+                resp.status = falcon.HTTP_400
+                io_loop.stop()
+                return
+            if not hasattr(req, 'json'):
+                resp.status = falcon.HTTP_400
+                resp.json = {
+                    "message": "Request body is not valid JSON"
+                }
+                io_loop.stop()
+                return
+            if 'name' in req.json:
+                result.name = req.json['name']
+            if 'state' in req.json:
+                result.state = req.json['state']
+            if 'country' in req.json:
+                result.name = req.json['country']
+            result.save(callback=handle_city_updated)
+        def handle_city_updated(result):
+            name = result._name if 'name' not in req.json else req.json['name']
+            state = result._state if 'state' not in req.json else req.json['state']
+            country = result._country if 'country' not in req.json else req.json['country']
+            id = str(result._id)
             resp.json = {
-                "name": result._name,
-                "state": result._state,
-                "country": result._country
+                "id": id,
+                "name": name,
+                "state": state,
+                "country": country
             }
             io_loop.stop()
         io_loop.add_timeout(1, find_city)
