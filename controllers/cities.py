@@ -2,12 +2,14 @@
 # -*- coding: utf-8 -*-
 
 import falcon
+from falconratelimit import rate_limit
 from bson import ObjectId
 from tornado import ioloop
 from models.city import City
 
 io_loop = ioloop.IOLoop.instance()
 
+@falcon.before(rate_limit(per_second=2, window_size=2))
 class CityRoutes(object):
 
     def on_get(self, req, resp):
@@ -149,5 +151,44 @@ class CityRoutes(object):
                 "country": country
             }
             io_loop.stop()
+        io_loop.add_timeout(1, find_city)
+        io_loop.start()
+    def on_delete(self, req, resp):
+        def find_city():
+            if 'id' not in req.params:
+                resp.status = falcon.HTTP_400
+                io_loop.stop()
+                return
+            if not ObjectId.is_valid(req.params['id']):
+                resp.status = falcon.HTTP_400
+                io_loop.stop()
+                return
+            try:
+                City.objects.get(
+                    req.params['id'],
+                    callback=handle_city_found
+                )
+            except Exception as e:
+                resp.status = falcon.HTTP_400
+                if hasattr(e, 'title') and hasattr(e, 'description'):
+                    resp.json = {
+                        "message": "%s - %s" % (e.title, e.description)
+                    }
+                io_loop.stop()
+        def handle_city_found(result):
+            if result is None:
+                resp.status = falcon.HTTP_400
+                io_loop.stop()
+                return
+            result.delete(callback=handle_city_deleted)
+        def handle_city_deleted(result):
+            try:
+                assert result == 1, \
+                    "Unable to delete id: %s" % req.params['id']
+            finally:
+                resp.json = {
+                    "message": "Deleted successfully id: %s" % req.params['id']
+                }
+                io_loop.stop()
         io_loop.add_timeout(1, find_city)
         io_loop.start()
