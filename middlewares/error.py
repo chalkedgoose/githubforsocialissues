@@ -4,12 +4,8 @@
 import falcon
 
 class ErrorHandler:
-    def process_resource(self, req, resp, resource, params):
-        if resp.status != falcon.HTTP_200:
-            raise falcon.HTTPBadRequest("Bad request")
-
     def process_response(self, req, resp, resource):
-        if resp.status != falcon.HTTP_200:
+        if resp.status != falcon.HTTP_200 and not hasattr(resp, 'json'):
             resp.status = falcon.HTTP_404
             resp.json = {
                 "message": "Not Found - %s %s" % (req.method, req.relative_uri)
