@@ -4,7 +4,7 @@
 from mongoengine import *
 
 
-class Issue(Document):
+class Issues(Document):
     title = StringField(required=True)
     description = StringField(required=True)
     author = ReferenceField('User', reverse_delete_rule=mongoengine.PULL)

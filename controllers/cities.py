@@ -11,8 +11,8 @@ class CityRoutes(object):
     def on_get(self, req, resp):
         if 'id' in req.params and ObjectId.is_valid(req.params['id']):
             try:
-                city = City.objects(id=req.params['id'])
-                resp.json = City.to_json(city[0])
+                city = City.objects(id=req.params['id'])[0]
+                resp.json = City.to_json(city)
             except Exception:
                 resp.status = falcon.HTTP_400
                 resp.json = {
@@ -40,7 +40,23 @@ class CityRoutes(object):
                 }
 
     def on_put(self, req, resp):
-        return
+        if 'id' in req.params and ObjectId.is_valid(req.params['id']):
+            try:
+                city = City.objects(id=req.params['id'])[0]
+                if hasattr(req, 'json') and 'name' in req.json:
+                    city.name = req.get_json('name')
+                if hasattr(req, 'json') and 'state' in req.json:
+                    city.state = req.get_json('state')
+                if hasattr(req, 'json') and 'country' in req.json:
+                    city.country = req.get_json('country')
+                city.save()
+                resp.json = City.to_json(city)
+            except Exception:
+                resp.status = falcon.HTTP_400
+                resp.json = {
+                    "message": "City id: %s not found in database!" %
+                    req.params['id']
+                }
 
     def on_delete(self, req, resp):
         if 'id' in req.params and ObjectId.is_valid(req.params['id']):

@@ -4,7 +4,7 @@
 from mongoengine import *
 
 
-class User(Document):
+class Users(Document):
     avatar = StringField(required=True, default='')
     first_name = StringField(required=True)
     last_name = StringField(required=True)
