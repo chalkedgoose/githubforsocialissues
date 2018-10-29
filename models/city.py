@@ -9,10 +9,10 @@ class Cities(Document):
     state = StringField(required=True)
     country = StringField(required=True)
 
-    def to_json(q):
+    def to_json(query_object):
         return {
-            "id": str(q.id),
-            "name": q.name,
-            "state": q.state,
-            "country": q.country
+            "id": str(query_object.id),
+            "name": query_object.name,
+            "state": query_object.state,
+            "country": query_object.country
         }

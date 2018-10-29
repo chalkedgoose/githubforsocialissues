@@ -11,3 +11,14 @@ class Users(Document):
     email = StringField(required=True)
     password = StringField(required=True)
     issues_resolved = ListField(ReferenceField('Issue'))
+
+    def to_json(query_object):
+        return {
+            "id": str(query_object.id),
+            "avatar": query_object.avatar,
+            "first_name": query_object.first_name,
+            "last_name": query_object.last_name,
+            "email": query_object.email,
+            "password": query_object.password,
+            "issues_resolved": [str(i) for i in query_object.issues_resolved]
+        }
