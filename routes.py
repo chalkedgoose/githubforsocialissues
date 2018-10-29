@@ -5,7 +5,9 @@ from server import api
 from controllers.api import ApiRoutes
 from controllers.cities import CityRoutes
 from controllers.issues import IssueRoutes
+from controllers.users import UserRoutes
 
 api.add_route('/', ApiRoutes())
 api.add_route('/cities', CityRoutes())
 api.add_route('/issues', IssueRoutes())
+api.add_route('/users', UserRoutes())
