@@ -1,5 +1,4 @@
-# py-api
-A simple but fast api in python for use with MongoDB.
+# githubforsocialissues
 
 ## Setup
 - Requirements: Python >= 3.5 `python3 -V` and [MongoDB](https://www.mongodb.com/download-center).
