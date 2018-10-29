@@ -66,9 +66,10 @@ class CityRoutes(object):
             io_loop.stop()
         if req.params == {}:
             io_loop.add_timeout(1, find_cities)
+            io_loop.start()
         else:
             io_loop.add_timeout(1, find_city)
-        io_loop.start()
+            io_loop.start()
 
     def on_post(self, req, resp):
         def create_city():
