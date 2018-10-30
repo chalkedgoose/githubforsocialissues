@@ -7,6 +7,7 @@ from models.city import Cities as City
 
 
 class Issues(Document):
+    ''' creates issue document '''
     title = StringField(required=True)
     description = StringField(required=True)
     author = ReferenceField(User)
