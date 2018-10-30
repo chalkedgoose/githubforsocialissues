@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # from mongoengine import *
-from mongoengine import Document
+from mongoengine import *
 
 
 class Cities(Document):
@@ -12,7 +12,7 @@ class Cities(Document):
     country = StringField(required=True)
 
     def to_json(self):
-        '''Converts document to dictionary in json format'''
+        ''' Converts document to dictionary in json format '''
         return {
             "id": str(self.id),
             "name": self.name,

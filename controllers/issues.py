@@ -12,7 +12,7 @@ class IssueRoutes(object):
         if 'id' in req.params and ObjectId.is_valid(req.params['id']):
             try:
                 issue = Issue.objects(id=req.params['id'])[0]
-                resp.json = Issue.to_json(issue)
+                resp.json = issue.to_json()
             except Exception:
                 resp.status = falcon.HTTP_400
                 resp.json = {
@@ -32,7 +32,7 @@ class IssueRoutes(object):
                 resolved_by=ObjectId(req.get_json('resolved_by'))
             )
             issue.save()
-            resp.json = Issue.to_json(issue)
+            resp.json = issue.to_json()
         except Exception as e:
             resp.status = falcon.HTTP_400
             if hasattr(e, 'title') and hasattr(e, 'description'):
@@ -53,7 +53,7 @@ class IssueRoutes(object):
                 if hasattr(req, 'json') and 'resolved_by' in req.json:
                     issue.resolved_by = ObjectId(req.get_json('resolved_by'))
                 issue.save()
-                resp.json = Issue.to_json(issue)
+                resp.json = issue.to_json()
             except Exception:
                 resp.status = falcon.HTTP_400
                 resp.json = {

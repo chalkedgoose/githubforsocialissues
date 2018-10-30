@@ -14,13 +14,13 @@ class Users(Document):
     password = StringField(required=True)
     city = ReferenceField(City)
 
-    def to_json(query_object):
-        ''' converts User to json '''
+    def to_json(self):
+        ''' Converts document to dictionary in json format '''
         return {
-            "id": str(query_object.id),
-            "avatar": query_object.avatar,
-            "first_name": query_object.first_name,
-            "last_name": query_object.last_name,
-            "email": query_object.email,
-            "password": query_object.password
+            "id": str(self.id),
+            "avatar": self.avatar,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "email": self.email,
+            "password": self.password
         }

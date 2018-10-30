@@ -12,7 +12,7 @@ class UserRoutes(object):
         if 'id' in req.params and ObjectId.is_valid(req.params['id']):
             try:
                 user = User.objects(id=req.params['id'])[0]
-                resp.json = User.to_json(user)
+                resp.json = user.to_json(user)
             except Exception:
                 resp.status = falcon.HTTP_400
                 resp.json = {
@@ -33,7 +33,7 @@ class UserRoutes(object):
                 password=req.get_json('password')
             )
             user.save()
-            resp.json = User.to_json(user)
+            resp.json = user.to_json(user)
         except Exception as e:
             resp.status = falcon.HTTP_400
             if hasattr(e, 'title') and hasattr(e, 'description'):
@@ -56,7 +56,7 @@ class UserRoutes(object):
                 if hasattr(req, 'json') and 'password' in req.json:
                     user.password = req.get_json('password')
                 user.save()
-                resp.json = User.to_json(user)
+                resp.json = user.to_json(user)
             except Exception:
                 resp.status = falcon.HTTP_400
                 resp.json = {

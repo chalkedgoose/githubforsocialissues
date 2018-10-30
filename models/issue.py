@@ -14,13 +14,13 @@ class Issues(Document):
     resolved_by = ReferenceField(User)
     city = ReferenceField(City)
 
-    def to_json(query_object):
-        ''' returns Issue as a json'''
+    def to_json(self):
+        ''' Converts document to dictionary in json format '''
         return {
-            "id": str(query_object.id),
-            "title": query_object.title,
-            "description": query_object.description,
-            "author": str(query_object.author),
-            "resolved_by": str(query_object.resolved_by),
-            "city": str(query_object.city)
+            "id": str(self.id),
+            "title": self.title,
+            "description": self.description,
+            "author": str(self.author),
+            "resolved_by": str(self.resolved_by),
+            "city": str(self.city)
         }
