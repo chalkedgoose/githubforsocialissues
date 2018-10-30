@@ -5,17 +5,19 @@ from mongoengine import *
 from datetime import datetime
 
 
-class Reqs(Document):
+class Mvps(Document):
     ''' Creates request instance '''
 
-    form = StringField(required=True)
+    method = StringField(required=True)
     endpoint = StringField(required=True)
-    called_on = DateTimeField(default=datetime.now)
+    ip = StringField()
+    accessed_on = DateTimeField(default=datetime.now)
+
 
     def to_json(self):
         ''' returns document as json '''
         return {
-            "form": str(self.form),
+            "method": str(self.form),
             "endpoint": str(self.endpoint),
             "called_on": str(self.called_on)
         }
