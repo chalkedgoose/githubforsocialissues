@@ -11,8 +11,7 @@ class UserRoutes(object):
     def on_get(self, req, resp):
         if 'id' in req.params and ObjectId.is_valid(req.params['id']):
             try:
-                user = User.objects(id=req.params['id'])[0]
-                resp.json = user.to_json()
+                resp.json = User.objects(id=req.params['id'])[0].to_json()
             except Exception:
                 resp.status = falcon.HTTP_400
                 resp.json = {

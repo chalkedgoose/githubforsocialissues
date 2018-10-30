@@ -34,7 +34,7 @@ class CityRoutes(object):
 
         # Everything else just display all cities
         else:
-            cities = [City.to_json(i) for i in City.objects]
+            cities = [i.to_json() for i in City.objects]
             resp.json = cities
 
     # '/cities' POST

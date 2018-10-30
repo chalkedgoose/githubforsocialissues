@@ -11,8 +11,7 @@ class IssueRoutes(object):
     def on_get(self, req, resp):
         if 'id' in req.params and ObjectId.is_valid(req.params['id']):
             try:
-                issue = Issue.objects(id=req.params['id'])[0]
-                resp.json = issue.to_json()
+                resp.json = Issue.objects(id=req.params['id'])[0].to_json()
             except Exception:
                 resp.status = falcon.HTTP_400
                 resp.json = {
@@ -20,7 +19,7 @@ class IssueRoutes(object):
                     req.params['id']
                 }
         else:
-            issues = [Issue.to_json(i) for i in Issue.objects]
+            issues = [i.to_json() for i in Issue.objects]
             resp.json = issues
 
     def on_post(self, req, resp):
