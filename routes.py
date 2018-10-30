@@ -7,6 +7,8 @@ from controllers.cities import CityRoutes
 from controllers.issues import IssueRoutes
 from controllers.users import UserRoutes
 
+
+# Register routes with API
 api.add_route('/', ApiRoutes())
 api.add_route('/cities', CityRoutes())
 api.add_route('/issues', IssueRoutes())

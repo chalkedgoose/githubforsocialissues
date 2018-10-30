@@ -3,8 +3,11 @@
 
 import falcon
 
+
+# ApiRoutes Router Class
 class ApiRoutes(object):
 
+    # Index route '/'
     def on_get(self, req, resp):
         resp.json = {
             "message": "Welcome to githubforsocialissues 🎉!"
