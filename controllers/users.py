@@ -9,6 +9,8 @@ from models.user import Users as User
 class UserRoutes(object):
 
     def on_get(self, req, resp):
+        ''' Users Controller Get Request Method '''
+
         if 'id' in req.params and ObjectId.is_valid(req.params['id']):
             try:
                 resp.json = User.objects(id=req.params['id'])[0].to_json()
@@ -19,10 +21,12 @@ class UserRoutes(object):
                     req.params['id']
                 }
         else:
-            users = [User.to_json(i) for i in User.objects]
+            users = [i.to_json() for i in User.objects]
             resp.json = users
 
     def on_post(self, req, resp):
+        ''' Users Controller Post Request Method '''
+
         try:
             user = User(
                 avatar=req.get_json('avatar'),
@@ -41,6 +45,8 @@ class UserRoutes(object):
                 }
 
     def on_put(self, req, resp):
+        ''' Users Controller Put Request Method '''
+
         if 'id' in req.params and ObjectId.is_valid(req.params['id']):
             try:
                 user = User.objects(id=req.params['id'])[0]
@@ -64,6 +70,8 @@ class UserRoutes(object):
                 }
 
     def on_delete(self, req, resp):
+        ''' Users Controller Delete Request Method '''
+
         if 'id' in req.params and ObjectId.is_valid(req.params['id']):
             res = User.objects(id=req.params['id']).delete()
             if res == 1:

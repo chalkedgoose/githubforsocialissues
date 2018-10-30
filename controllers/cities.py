@@ -16,6 +16,7 @@ class CityRoutes(object):
     # = returns json collection of documents or
     # = single document representation in json
     def on_get(self, req, resp):
+        ''' City Controller Get Request Method '''
 
         # If ?id= is in url and value for id is valid ObjectId
         if 'id' in req.params and ObjectId.is_valid(req.params['id']):
@@ -43,6 +44,8 @@ class CityRoutes(object):
     # > required: name, state, country
     # = returns json representation of new document
     def on_post(self, req, resp):
+        ''' City Controller Post Request Method '''
+
         try:
 
             # Create document from json post data
@@ -73,6 +76,7 @@ class CityRoutes(object):
     # > JSON format required: name, state, country
     # = returns json representation of updated document
     def on_put(self, req, resp):
+        ''' City Controller Put Request Method '''
 
         # If ?id= is in url and value for id is valid ObjectId
         if 'id' in req.params and ObjectId.is_valid(req.params['id']):
@@ -109,6 +113,7 @@ class CityRoutes(object):
     # > No request body required
     # = returns json message
     def on_delete(self, req, resp):
+        ''' City Controller Delete Request Method '''
 
         # If ?id= is in url and value for id is valid ObjectId
         if 'id' in req.params and ObjectId.is_valid(req.params['id']):

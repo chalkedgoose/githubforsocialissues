@@ -9,6 +9,8 @@ from models.issue import Issues as Issue
 class IssueRoutes(object):
 
     def on_get(self, req, resp):
+        ''' Issues Controller Get Request Method '''
+
         if 'id' in req.params and ObjectId.is_valid(req.params['id']):
             try:
                 resp.json = Issue.objects(id=req.params['id'])[0].to_json()
@@ -23,6 +25,8 @@ class IssueRoutes(object):
             resp.json = issues
 
     def on_post(self, req, resp):
+        ''' Issues Controller Post Request Method '''
+
         try:
             issue = Issue(
                 title=req.get_json('title'),
@@ -40,6 +44,8 @@ class IssueRoutes(object):
                 }
 
     def on_put(self, req, resp):
+        ''' Issues Controller Put Request Method '''
+
         if 'id' in req.params and ObjectId.is_valid(req.params['id']):
             try:
                 issue = Issue.objects(id=req.params['id'])[0]
@@ -61,6 +67,8 @@ class IssueRoutes(object):
                 }
 
     def on_delete(self, req, resp):
+        ''' Issues Controller Delete Request Method '''
+
         if 'id' in req.params and ObjectId.is_valid(req.params['id']):
             res = Issue.objects(id=req.params['id']).delete()
             if res == 1:
