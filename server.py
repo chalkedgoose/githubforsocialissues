@@ -13,4 +13,4 @@ api = falcon.API(middleware=[
 ])
 
 # connect to mongodb
-connect('py-api')
+connect('githubforsocialissues')

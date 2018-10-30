@@ -4,6 +4,7 @@
 from mongoengine import *
 from models.user import Users as User
 
+
 class Issues(Document):
     title = StringField(required=True)
     description = StringField(required=True)
