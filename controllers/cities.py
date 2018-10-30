@@ -21,11 +21,8 @@ class CityRoutes(object):
         if 'id' in req.params and ObjectId.is_valid(req.params['id']):
             try:
 
-                # Get document from db with specified id
-                city = City.objects(id=req.params['id'])[0]
-
-                # Respond with found document in json format
-                resp.json = City.to_json(city)
+                # Get document from db with specified id and respond in json
+                resp.json = City.objects(id=req.params['id'])[0].to_json()
 
             # Id not in database? - display error
             except Exception:
@@ -58,8 +55,9 @@ class CityRoutes(object):
             # Save document to database
             city.save()
 
+
             # Respond with new document in json format
-            resp.json = City.to_json(city)
+            resp.json = city.to_json()
 
         # Unable to create document? - return error as json
         except Exception as e:
@@ -96,7 +94,7 @@ class CityRoutes(object):
                 city.save()
 
                 # Respond with updated document in json format
-                resp.json = City.to_json(city)
+                resp.json = city.to_json()
 
             # Id not found in db? - return error in json format
             except Exception:

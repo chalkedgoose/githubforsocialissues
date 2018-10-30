@@ -11,11 +11,11 @@ class Cities(Document):
     state = StringField(required=True)
     country = StringField(required=True)
 
-    def to_json(query_object):
-    ''' returns object as dict '''
-    return {
-        "id": str(query_object.id),
-        "name": query_object.name,
-        "state": query_object.state,
-        "country": query_object.country
-    }
+    def to_json(self):
+        '''Converts document to dictionary in json format'''
+        return {
+            "id": str(self.id),
+            "name": self.name,
+            "state": self.state,
+            "country": self.country
+        }
