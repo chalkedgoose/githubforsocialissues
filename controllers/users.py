@@ -30,8 +30,7 @@ class UserRoutes(object):
                 first_name=req.get_json('first_name'),
                 last_name=req.get_json('last_name'),
                 email=req.get_json('email'),
-                password=req.get_json('password'),
-                issues_resolved=[ObjectId(i) for i in req.get_json('author')]
+                password=req.get_json('password')
             )
             user.save()
             resp.json = User.to_json(user)
@@ -56,9 +55,6 @@ class UserRoutes(object):
                     user.email = req.get_json('email')
                 if hasattr(req, 'json') and 'password' in req.json:
                     user.password = req.get_json('password')
-                if hasattr(req, 'json') and 'issues_resolved' in req.json:
-                    user.issues_resolved = [ObjectId(i) for i in
-                                            req.get_json('issues_resolved')]
                 user.save()
                 resp.json = User.to_json(user)
             except Exception:

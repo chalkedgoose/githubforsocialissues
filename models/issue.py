@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 
 from mongoengine import *
-
+from models.user import Users as User
 
 class Issues(Document):
     title = StringField(required=True)
     description = StringField(required=True)
-    author = ReferenceField('User', reverse_delete_rule=mongoengine.PULL)
-    resolved_by = ReferenceField('User', reverse_delete_rule=mongoengine.PULL)
+    author = ReferenceField(User)
+    resolved_by = ReferenceField(User)
 
     def to_json(query_object):
         return {
