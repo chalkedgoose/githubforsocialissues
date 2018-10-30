@@ -15,7 +15,7 @@ class Issues(Document):
     city = ReferenceField(City)
 
     def to_json(query_object):
-        ''' returns Issue as a dict '''
+        ''' returns Issue as a json'''
         return {
             "id": str(query_object.id),
             "title": query_object.title,
