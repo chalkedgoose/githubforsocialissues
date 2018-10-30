@@ -10,6 +10,11 @@ from models.city import Cities as City
 class CityRoutes(object):
 
     # '/cities' GET
+    # ? id parameter returns single matching document
+    # ? all other or no parameters returns all documents in collection
+    # > No request body required
+    # = returns json collection of documents or
+    # = single document representation in json
     def on_get(self, req, resp):
 
         # If ?id= is in url and value for id is valid ObjectId
@@ -36,6 +41,10 @@ class CityRoutes(object):
             resp.json = cities
 
     # '/cities' POST
+    # ? No parameters
+    # > All of the following in valid JSON format
+    # > required: name, state, country
+    # = returns json representation of new document
     def on_post(self, req, resp):
         try:
 
@@ -61,6 +70,10 @@ class CityRoutes(object):
                 }
 
     # '/cities' PUT
+    # ? id parameter required
+    # > At least one of the following in valid
+    # > JSON format required: name, state, country
+    # = returns json representation of updated document
     def on_put(self, req, resp):
 
         # If ?id= is in url and value for id is valid ObjectId
@@ -94,6 +107,9 @@ class CityRoutes(object):
                 }
 
     # '/cities' DELETE
+    # ? id parameter required
+    # > No request body required
+    # = returns json message
     def on_delete(self, req, resp):
 
         # If ?id= is in url and value for id is valid ObjectId
