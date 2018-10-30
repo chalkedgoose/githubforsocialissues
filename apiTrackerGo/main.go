@@ -21,6 +21,8 @@ func main() {
 	}
 	// The Reqs connection from the MongoDatabase
 	collection := client.Database("githubforsocialissues").Collection("reqs")
+	
+	
 
 
 	fmt.Println(collection)
