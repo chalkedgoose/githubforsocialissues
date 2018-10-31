@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import falcon
-from models.mvp import Mvps as Mvp
+from models.req import Reqs as Req
 
 
 class RequestTracker:
@@ -13,9 +13,9 @@ class RequestTracker:
         # If the response status is not 200 (Ok) and request is
         # is successful, create mvp document logging request
         if resp.status == falcon.HTTP_200 and req_succeeded:
-            mvp = Mvp(
+            request = Req(
                 method=req.method,
                 endpoint=req.relative_uri,
                 ip=req.remote_addr
             )
-            mvp.save()
+            request.save()

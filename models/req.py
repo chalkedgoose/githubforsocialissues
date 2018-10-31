@@ -5,7 +5,7 @@ from mongoengine import *
 from datetime import datetime
 
 
-class Mvps(Document):
+class Reqs(Document):
     ''' Creates request instance '''
 
     method = StringField(required=True)
