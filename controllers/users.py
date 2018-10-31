@@ -29,11 +29,12 @@ class UserRoutes(object):
 
         try:
             user = User(
-                avatar=req.get_json('avatar'),
+                avatar=req.json.get('avatar', ''),
                 first_name=req.get_json('first_name'),
                 last_name=req.get_json('last_name'),
                 email=req.get_json('email'),
-                password=req.get_json('password')
+                password=req.get_json('password'),
+                city=ObjectId(req.get_json('city'))
             )
             user.save()
             resp.json = user.to_json()

@@ -7,7 +7,7 @@ from models.city import Cities as City
 
 class Users(Document):
     ''' creates user  document '''
-    avatar = StringField(required=True, default='')
+    avatar = StringField(default='')
     first_name = StringField(required=True)
     last_name = StringField(required=True)
     email = StringField(required=True)
@@ -22,5 +22,6 @@ class Users(Document):
             "first_name": self.first_name,
             "last_name": self.last_name,
             "email": self.email,
-            "password": self.password
+            "password": self.password,
+            "city": self.city.to_json() if self.city is not None else ""
         }

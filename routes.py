@@ -13,3 +13,6 @@ api.add_route('/', ApiRoutes())
 api.add_route('/cities', CityRoutes())
 api.add_route('/issues', IssueRoutes())
 api.add_route('/users', UserRoutes())
+
+# see a city and it's users  /cities/:city-id/users
+api.add_route('/cities/{id}/users', CityRoutes())

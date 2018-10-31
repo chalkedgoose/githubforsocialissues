@@ -4,6 +4,7 @@
 import falcon
 from bson import ObjectId
 from models.city import Cities as City
+from models.user import Users as User
 
 
 # CityRoutes Router Class
@@ -15,8 +16,12 @@ class CityRoutes(object):
    # > No request body required
    # = returns json collection of documents or
    # = single document representation in json
-    def on_get(self, req, resp):
+    def on_get(self, req, resp, **args):
         ''' City Controller Get Request Method '''
+        
+        # Returns users with specified city id
+        if 'id' in args and ObjectId.is_valid(args['id']):
+            resp.json = [i.to_json() for i in User.objects(city=args['id'])]
 
         # If ?id= is in url and value for id is valid ObjectId
         if 'id' in req.params and ObjectId.is_valid(req.params['id']):
