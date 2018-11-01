@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "main": "app.js",
   "license": "MIT",
+  "scripts": {
+    "start": " node app.js"
+  },
   "dependencies": {
-    "circular-json": "^0.5.9",
     "express": "^4.16.4",
     "mongoose": "^5.3.8"
   }
