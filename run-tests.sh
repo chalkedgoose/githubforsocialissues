@@ -1,0 +1,1 @@
+pocha tests/**/*.py
