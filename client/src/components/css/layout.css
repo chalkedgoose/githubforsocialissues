@@ -1,0 +1,8 @@
+body,
+html {
+  margin: 5px;
+  font-family: Helvetica;
+  font-size: 1.2em;
+  background-color: #e5e5e5;
+  height: 100%;
+}
