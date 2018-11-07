@@ -1,25 +1,80 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { compose, withProps } from 'recompose'
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
-// import {geolocated} from 'react-geolocated'
+import {
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Marker,
+} from 'react-google-maps'
 
 const Map = compose(
   withProps({
-    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyDDwrgWKkdd5dT7ftnPaccBM6zgRb5R90g&libraries=geometry,drawing,places",
-    loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `400px` }} />,
-    mapElement: <div style={{ height: `100%` }} />,
+      googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyDDwrgWKkdd5dT7ftnPaccBM6zgRb5R90g",
+      loadingElement: <div style={{ height: `100%` }} />,
+      containerElement: <div style={{ height: `400px` }} />,
+      mapElement: <div style={{ height: `100%` }} />,
   }),
   withScriptjs,
   withGoogleMap
 )((props) =>
-
   <GoogleMap
-    defaultZoom={8}
-    defaultCenter={{ lat: -34.397, lng: 150.644 }}
+      defaultZoom={14}
+      center={{ lat: props.currentLocation.lat, lng: props.currentLocation.lng }}
   >
-    {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} />}
+      {props.isMarkerShown && <Marker position={{ lat: props.currentLocation.lat, lng: props.currentLocation.lng }} />}
   </GoogleMap>
 )
 
-export default Map
+class MapComponent extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentLatLng: {
+        lat: 37.78768,
+        lng: -122.41094,
+      },
+      isMarkerShown: false
+    }
+  }
+
+  showCurrentLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        position => (
+          this.setState(prevState => ({
+            currentLatLng: {
+              ...prevState.currentLatLng,
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            },
+            isMarkerShown: true
+          }))
+        )
+      )
+    } else {
+      this.setState(prevState => ({
+        currentLatLng: {
+          ...prevState.currentLatLng,
+        },
+        isMarkerShown: false
+      }))
+    }
+  }
+
+
+  componentDidMount() {
+    this.showCurrentLocation()
+  }
+
+  render() {
+    return (
+      <div>
+        <Map
+          isMarkerShown={this.state.isMarkerShown}
+          currentLocation={this.state.currentLatLng} />
+      </div>
+    );
+  }
+}
+
+export default MapComponent
