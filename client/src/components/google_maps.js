@@ -18,7 +18,7 @@ const Map = compose(
   withGoogleMap
 )((props) =>
   <GoogleMap
-      defaultZoom={14}
+      zoom={props.zoom}
       center={{ lat: props.currentLocation.lat, lng: props.currentLocation.lng }}
   >
       {props.isMarkerShown && <Marker position={{ lat: props.currentLocation.lat, lng: props.currentLocation.lng }} />}
@@ -33,7 +33,8 @@ class MapComponent extends Component {
         lat: 37.78768,
         lng: -122.41094,
       },
-      isMarkerShown: false
+      isMarkerShown: false,
+      zoom: 12,
     }
   }
 
@@ -47,17 +48,11 @@ class MapComponent extends Component {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             },
-            isMarkerShown: true
+            isMarkerShown: true,
+            zoom: 15,
           }))
         )
       )
-    } else {
-      this.setState(prevState => ({
-        currentLatLng: {
-          ...prevState.currentLatLng,
-        },
-        isMarkerShown: false
-      }))
     }
   }
 
@@ -71,7 +66,8 @@ class MapComponent extends Component {
       <div>
         <Map
           isMarkerShown={this.state.isMarkerShown}
-          currentLocation={this.state.currentLatLng} />
+          currentLocation={this.state.currentLatLng}
+          zoom={this.state.zoom} />
       </div>
     );
   }
