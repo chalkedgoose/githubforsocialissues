@@ -8,15 +8,13 @@ const MainRouter = require('./controllers/MainRouter.js');
  * Connecting to the MongoDatabase
  */
 
- let connection;
 
-try {
-    mongoose.connect(config.MongoURI, { useNewUrlParser: true });
-}
-catch (err) {
-    console.log(err);
-}
-
+mongoose.connect(config.MongoURI, { useNewUrlParser: true })
+    .catch(
+        (err) => {
+            throw err;
+        }
+    )
 
 
 /**
