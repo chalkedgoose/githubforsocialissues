@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
+import Map from './google_maps'
+import Footer from './footer'
 
 // import Header from './header'
 import './css/layout.css'
@@ -35,7 +37,9 @@ const Layout = ({ children }) => (
           }}
           className='container'
         >
+          <Map></Map>
           {children}
+          <Footer></Footer>
         </div>
       </>
     )}

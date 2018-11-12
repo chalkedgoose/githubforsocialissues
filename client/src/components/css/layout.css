@@ -13,7 +13,10 @@ html {
   grid-gap: 10px;
   grid-template-areas: "m m m"
                        "m m m"
-                       "i i t";
+                       "m m m"
+                       "i i s"
+                       "i i s"
+                       "f f f";
 }
 
 .map_container {
@@ -22,8 +25,22 @@ html {
 
 .issues_container {
   grid-area: i;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.test {
-  grid-area: t;
+.sidebar_container {
+  grid-area: s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.footer_container {
+  grid-area: f;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: .7em;
 }
