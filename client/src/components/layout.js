@@ -30,12 +30,7 @@ const Layout = ({ children }) => (
         >
           <html lang="en" />
         </Helmet>
-        <div
-          style={{
-            margin: '0 auto'
-          }}
-          className='container'
-        >
+        <div className='container'>
           <Map></Map>
           {children}
           <Footer></Footer>

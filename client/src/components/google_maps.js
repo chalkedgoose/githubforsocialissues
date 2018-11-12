@@ -12,7 +12,7 @@ const Map = compose(
     googleMapURL:
       'https://maps.googleapis.com/maps/api/js?key=AIzaSyDDwrgWKkdd5dT7ftnPaccBM6zgRb5R90g',
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `400px` }} />,
+    containerElement: <div style={{ height: `50vh` }} />,
     mapElement: <div style={{ height: `100%` }} />,
   }),
   withScriptjs,

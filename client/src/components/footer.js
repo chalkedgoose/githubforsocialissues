@@ -11,7 +11,7 @@ class FooterComponent extends Component {
   render() {
 
     return (
-      <div className="footer_container">
+      <div className="footer_container" style={{ marginBottom: '10px' }}>
         &copy; 2018 Project Pescadero
       </div>
     )

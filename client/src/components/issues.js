@@ -12,12 +12,12 @@ class Issues extends Component {
       <div className="issues_container">
         <div className="issues_header_card">Issues</div>
         <div className="issues_card">
-          <div className="issue">
-            <img
+        <img
               className="issues_card_profile_pic"
               src="https://via.placeholder.com/150"
               alt="Profile"
             />
+          <div className="issue">
             <div className="issue_box">
               <h2 className="issue_name">Garbage Cleanup</h2>
               <p className="issue_description">
@@ -26,8 +26,8 @@ class Issues extends Component {
                 come by?
               </p>
             </div>
+            <button className="resolve_btn">Resolve</button>
           </div>
-          <button className="resolve_btn">Resolve</button>
         </div>
       </div>
     )
