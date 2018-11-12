@@ -1,7 +1,7 @@
 # Project Pescadero
 
 ## Servers
----
+
 ### API Setup
 - Requirements: Python >= 3.5 `python3 -V` and [MongoDB](https://www.mongodb.com/download-center).
 - Install dependencies on a virtualenv `python3 -m pip install --user virtualenv`:
@@ -18,7 +18,7 @@ bash start-dev.sh
 ```
 
 ## Client
----
+
 ### Client Setup
 - Requirements: Node >= 10.11 `node -v`
 
