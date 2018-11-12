@@ -8,9 +8,12 @@ class IndexPage extends React.Component {
   
   render() {
     return (
-      <Layout>
+      <Layout className='container'>
         <Map></Map>
         <Issues></Issues>
+        <div className='test'>
+        hello
+        </div>
       </Layout>
     )
   }

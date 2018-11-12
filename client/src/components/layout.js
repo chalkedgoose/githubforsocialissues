@@ -33,6 +33,7 @@ const Layout = ({ children }) => (
           style={{
             margin: '0 auto'
           }}
+          className='container'
         >
           {children}
         </div>

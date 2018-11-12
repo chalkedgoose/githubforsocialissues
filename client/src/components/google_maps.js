@@ -68,7 +68,7 @@ class MapComponent extends Component {
 
   render() {
     return (
-      <div>
+      <div className='map_container'>
         <Map
           isMarkerShown={this.state.isMarkerShown}
           currentLocation={this.state.currentLatLng}
